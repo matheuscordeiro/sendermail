@@ -1,0 +1,7 @@
+    Hello{% if recipient %}, {{ recipient }}{% endif %}.
+
+    {{ body_message }}
+
+    {{ footer_message }}
+
+    * This mail has been generate automatically and should not be responded.
