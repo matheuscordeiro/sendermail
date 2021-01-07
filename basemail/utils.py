@@ -10,8 +10,8 @@ class BaseMail(EmailMultiAlternatives):
     def __init__(
         self,
         context=None,
-        html_template="base/mail.html",
-        txt_template="base/mail.txt",
+        html_template="basemail/mail.html",
+        txt_template="basemail/mail.txt",
         *args,
         **kwargs
     ):

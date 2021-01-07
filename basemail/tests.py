@@ -32,9 +32,9 @@ class BaseMailTestCase(TestCase):
         self.assertEqual(1, len(mail.outbox[0].alternatives))
 
     def test_body_html_should_return_correctly(self):
-        expected = render_to_string("base/mail.html", self.context)
+        expected = render_to_string("basemail/mail.html", self.context)
         self.assertEqual(expected, mail.outbox[0].alternatives[0][0])
 
     def test_body_text_should_return_correctly(self):
-        expected = render_to_string("base/mail.txt", self.context)
+        expected = render_to_string("basemail/mail.txt", self.context)
         self.assertEqual(expected, mail.outbox[0].body)

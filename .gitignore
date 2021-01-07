@@ -3,7 +3,7 @@
 
 ### Manually ###
 manage.py
-sendermail/
+/sendermail/
 .idea/
 
 ### Django ###
