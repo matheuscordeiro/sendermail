@@ -2,7 +2,7 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.test import TestCase
 
-from .utils import BaseMail
+from sendermail.base import BaseMail
 
 
 class BaseMailTestCase(TestCase):
@@ -50,9 +50,9 @@ class BaseMailTestCase(TestCase):
         self.assertIn("Recipient 1", mail.outbox[0].body)
 
     def test_body_html_should_return_correctly(self):
-        expected = render_to_string("basemail/mail.html", self.context)
+        expected = render_to_string("sendermail/mail.html", self.context)
         self.assertEqual(expected, mail.outbox[0].alternatives[0][0])
 
     def test_body_text_should_return_correctly(self):
-        expected = render_to_string("basemail/mail.txt", self.context)
+        expected = render_to_string("sendermail/mail.txt", self.context)
         self.assertEqual(expected, mail.outbox[0].body)

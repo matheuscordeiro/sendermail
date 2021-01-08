@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/matheuscordeiro/sendermail",
-    packages=["basemail"],
+    packages=["sendermail"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Framework :: Django :: 3.0",
