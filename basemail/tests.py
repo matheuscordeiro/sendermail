@@ -31,6 +31,24 @@ class BaseMailTestCase(TestCase):
     def test_should_return_one_alternative(self):
         self.assertEqual(1, len(mail.outbox[0].alternatives))
 
+    def test_body_message_should_be_in_body_html(self):
+        self.assertIn("Body Message 1", mail.outbox[0].alternatives[0][0])
+
+    def test_body_message_should_be_in_body_text(self):
+        self.assertIn("Body Message 1", mail.outbox[0].body)
+
+    def test_footer_message_should_be_in_body_html(self):
+        self.assertIn("Footer Message 1", mail.outbox[0].alternatives[0][0])
+
+    def test_footer_message_should_be_in_body_text(self):
+        self.assertIn("Footer Message 1", mail.outbox[0].body)
+
+    def test_recipient_should_be_in_body_html(self):
+        self.assertIn("Recipient 1", mail.outbox[0].alternatives[0][0])
+
+    def test_recipient_should_be_in_body_text(self):
+        self.assertIn("Recipient 1", mail.outbox[0].body)
+
     def test_body_html_should_return_correctly(self):
         expected = render_to_string("basemail/mail.html", self.context)
         self.assertEqual(expected, mail.outbox[0].alternatives[0][0])
