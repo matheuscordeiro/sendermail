@@ -5,7 +5,7 @@ from django.test import TestCase
 from sendermail.base import SenderMail
 
 
-class BaseMailTestCase(TestCase):
+class SenderMailTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
@@ -14,13 +14,13 @@ class BaseMailTestCase(TestCase):
             "footer_message": "Footer Message 1",
             "recipient": "Recipient 1",
         }
-        cls.base_mail = SenderMail(
+        cls.sender = SenderMail(
             subject="Subject Test", to=["test@com.br"], context=cls.context
         )
 
     def setUp(self) -> None:
         super().setUp()
-        self.base_mail.send_alternative()
+        self.sender.send_alternative()
 
     def test_should_return_one_mail(self):
         self.assertEqual(1, len(mail.outbox))
