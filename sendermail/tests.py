@@ -2,7 +2,7 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.test import TestCase
 
-from sendermail.base import BaseMail
+from sendermail.base import SenderMail
 
 
 class BaseMailTestCase(TestCase):
@@ -14,7 +14,7 @@ class BaseMailTestCase(TestCase):
             "footer_message": "Footer Message 1",
             "recipient": "Recipient 1",
         }
-        cls.base_mail = BaseMail(
+        cls.base_mail = SenderMail(
             subject="Subject Test", to=["test@com.br"], context=cls.context
         )
 
