@@ -34,6 +34,9 @@ class BaseMailTestCase(TestCase):
     def test_body_message_should_be_in_body_html(self):
         self.assertIn("Body Message 1", mail.outbox[0].alternatives[0][0])
 
+    def test_subject_should_be_in_body_html(self):
+        self.assertIn("Subject Test", mail.outbox[0].alternatives[0][0])
+
     def test_body_message_should_be_in_body_text(self):
         self.assertIn("Body Message 1", mail.outbox[0].body)
 
