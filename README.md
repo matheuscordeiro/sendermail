@@ -18,7 +18,7 @@ pip install git+https://github.com/matheuscordeiro/sender_mail.git@master#egg=se
 
 ## Usage
 ```
-base_mail = BaseMail(
+sender = SenderMail(
     subject="Subject Test",
     to=["test@com.br"],
     context={
@@ -27,7 +27,7 @@ base_mail = BaseMail(
         "recipient": "Recipient",
     }
 )
-base_mail.send_alternative()
+sender.send_alternative()
 ```
 
 ## License
