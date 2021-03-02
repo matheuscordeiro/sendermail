@@ -24,15 +24,20 @@ class BaseMail(EmailMultiAlternatives):
     def _html_message(self):
         return render_to_string(
             template_name=self.html_template,
-            context=self.context,
+            context=self.get_context(),
         )
 
     @property
     def _txt_message(self):
         return render_to_string(
             template_name=self.txt_template,
-            context=self.context,
+            context=self.get_context(),
         )
+
+    def get_context(self):
+        context = self.context
+        context['subject'] = self.subject
+        return context
 
     def send_alternative(self, fail_silently=False):
         send_mail(
