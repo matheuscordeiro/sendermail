@@ -7,8 +7,8 @@
 
 ## Requirements
 
-    Python >= 3.7.*
-    Django >= 3.0.8
+    Python = [3.7, 3.8, 3.9]
+    Django = 3.0.8
 
 ## Installation
 
