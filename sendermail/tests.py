@@ -20,7 +20,7 @@ class SenderMailTestCase(TestCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.sender.send_alternative()
+        self.sender.send()
 
     def test_should_return_one_mail(self):
         self.assertEqual(1, len(mail.outbox))
@@ -28,8 +28,8 @@ class SenderMailTestCase(TestCase):
     def test_subject_should_be_configured_correctly(self):
         self.assertEqual("Subject Test", mail.outbox[0].subject)
 
-    def test_should_return_one_alternative(self):
-        self.assertEqual(1, len(mail.outbox[0].alternatives))
+    def test_one_message_was_sent(self):
+        self.assertEqual(1, len(mail.outbox))
 
     def test_body_message_should_be_in_body_html(self):
         self.assertIn("Body Message 1", mail.outbox[0].alternatives[0][0])

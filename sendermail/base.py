@@ -4,11 +4,10 @@ from django.template.loader import render_to_string
 
 class BaseMail(EmailMultiAlternatives):
     """If you want to customize functions and attributes, you
-    should to inherit this class.
+    should inherit this class.
     """
     html_template = "sendermail/mail.html"
     txt_template = "sendermail/mail.txt"
-    subject = ""
     context = {}
 
     def __init__(
@@ -16,17 +15,17 @@ class BaseMail(EmailMultiAlternatives):
         *args,
         **kwargs
     ):
-        super().__init__(subject=self.get_subject(), *args, **kwargs)
+        super().__init__(*args, **kwargs)
+        self.body = self.body if self.body else self.get_txt_message()
+        self.subject = self.get_subject()
 
-    @property
-    def _html_message(self):
+    def get_html_message(self):
         return render_to_string(
             template_name=self.get_html_template(),
             context=self.get_context(),
         )
 
-    @property
-    def _txt_message(self):
+    def get_txt_message(self):
         return render_to_string(
             template_name=self.get_txt_template(),
             context=self.get_context(),
@@ -45,15 +44,11 @@ class BaseMail(EmailMultiAlternatives):
     def get_txt_template(self):
         return self.txt_template
 
-    def send_alternative(self, fail_silently=False):
-        send_mail(
-            self.get_subject(),
-            self._txt_message,
-            self.from_email,
-            self.to,
-            html_message=self._html_message,
-            fail_silently=fail_silently,
-        )
+    def send(self, fail_silently=False):
+        if self.get_html_message():
+            self.attach_alternative(self.get_html_message(), 'text/html')
+
+        return super().send(fail_silently)
 
 
 class SenderMail(BaseMail):
@@ -64,14 +59,12 @@ class SenderMail(BaseMail):
     def __init__(
         self,
         context=None,
-        subject="",
         html_template="",
         txt_template="",
         *args,
         **kwargs
     ):
-        self.subject = subject
-        super().__init__(*args, **kwargs)
         self.context = context if context else self.context
         self.html_template = html_template if html_template else self.html_template
         self.txt_template = txt_template if txt_template else self.txt_template
+        super().__init__(*args, **kwargs)
