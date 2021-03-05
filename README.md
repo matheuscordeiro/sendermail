@@ -7,13 +7,13 @@
 
 ## Requirements
 
-    Python = [3.7, 3.8, 3.9]
+    Python = [3.6, 3.7, 3.8, 3.9]
     Django = 3.0.8
 
 ## Installation
 
 ```
-pip install git+https://github.com/matheuscordeiro/sender_mail.git@master#egg=sender_mail
+pip install git+https://github.com/matheuscordeiro/sendermail.git@master#egg=sendermail
 ```
 
 ## Usage
