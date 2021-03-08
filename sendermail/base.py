@@ -1,4 +1,4 @@
-from django.core.mail import EmailMultiAlternatives, send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 
@@ -8,13 +8,14 @@ class BaseMail(EmailMultiAlternatives):
     """
     html_template = "sendermail/mail.html"
     txt_template = "sendermail/mail.txt"
-    context = {}
 
     def __init__(
         self,
+        context=None,
         *args,
         **kwargs
     ):
+        self.context = context if context else {}
         super().__init__(*args, **kwargs)
         self.body = self.body if self.body else self.get_txt_message()
         self.subject = self.get_subject()
@@ -58,13 +59,11 @@ class SenderMail(BaseMail):
 
     def __init__(
         self,
-        context=None,
         html_template="",
         txt_template="",
         *args,
         **kwargs
     ):
-        self.context = context if context else self.context
         self.html_template = html_template if html_template else self.html_template
         self.txt_template = txt_template if txt_template else self.txt_template
         super().__init__(*args, **kwargs)
