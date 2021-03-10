@@ -27,7 +27,7 @@ sender = SenderMail(
         "recipient": "Recipient",
     }
 )
-sender.send_alternative()
+sender.send()
 ```
 
 ## License
